@@ -1,0 +1,7 @@
+<h1>Commodity Details</h1>
+<h2>Name: {{ commodity.name }}</h2>
+Value: {{ commodity.value }}
+<p>
+    <a href="{%  url 'records:commodity-update' commodity.id %}">Update</a>
+    <a href="{%  url 'records:commodity-delete' commodity.id %}">Delete</a>
+</p>

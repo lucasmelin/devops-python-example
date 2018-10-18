@@ -7,8 +7,11 @@
 <ul>
 {%  for commodity in latest_commodity_list %}
     <li>
-    <a href="{%  url 'detail' commodity.id %}">{{ commodity.name }}</a>
+    <a href="{%  url 'records:commodity-detail' commodity.id %}">{{ commodity.name }}</a>
 </li>
 {% endfor %}
 </ul>
 {% endif %}
+<p>
+    <a href="{%  url 'records:commodity-add' %}">Add Commodity</a>
+</p>

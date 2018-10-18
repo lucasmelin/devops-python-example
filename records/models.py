@@ -1,5 +1,5 @@
 from django.db import models
-from django.forms import ModelForm
+from django.urls import reverse
 import csv
 from io import StringIO
 
@@ -42,7 +42,12 @@ class Commodity(models.Model):
     value = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
+        # String representation of a Commodity object
         return '{} {} {}'.format(self.name, self.value, self.unit_of_measurement)
+
+    def get_absolute_url(self):
+        # Gets called after the edit occurs
+        return reverse('records:commodity-detail', kwargs={'commodity_id': self.pk})
 
 
 def save_csv(csv_file):

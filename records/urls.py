@@ -1,10 +1,16 @@
 from django.urls import path
+
+from records.views import CommodityCreate, CommodityUpdate, CommodityDelete
 from . import views
 
+app_name = 'records'
 urlpatterns = [
     path('', views.index, name='index'),
     # ex: /records/upload
-    path('upload', views.upload_csv, name='upload'),
+    path('upload/', views.upload_csv, name='upload'),
     # ex: /records/10/
-    path('<int:commodity_id>/', views.detail, name='detail'),
+    path('<int:commodity_id>/view', views.detail, name='commodity-detail'),
+    path('add/', CommodityCreate.as_view(), name='commodity-add'),
+    path('<int:pk>/edit/', CommodityUpdate.as_view(), name='commodity-update'),
+    path('<int:pk>/delete/', CommodityDelete.as_view(), name='commodity-delete'),
 ]
