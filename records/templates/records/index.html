@@ -1,0 +1,14 @@
+{% if greeting %}
+   <h1>{{ greeting }}</h1>
+{% else %}
+    <p>Welcome!</p>
+{% endif %}
+{% if latest_commodity_list %}
+<ul>
+{%  for commodity in latest_commodity_list %}
+    <li>
+    <a href="{%  url 'detail' commodity.id %}">{{ commodity.name }}</a>
+</li>
+{% endfor %}
+</ul>
+{% endif %}
