@@ -1,5 +1,21 @@
-<h1>Commodity Edit</h1>
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit" />
+{% load recordfilters %}
+<!DOCTYPE html>
+<html lang="en">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+<body>
+<form class="measure center" method="post">{% csrf_token %}
+    <h3 class="f5 f4-ns fw6 mid-gray">Add Commodity</h3>
+    {% for field in form %}
+        <label class="db fw6 lh-copy f6" for="{{ field.name }}">{{ field.label }}</label>
+        {{ field | addCssClass:"pa2 input-reset ba bg-transparent hover-bg-green hover-white w-100" }}
+    {% endfor %}
+    <a class="f6 link dim ba ph3 pv2 mb2 dib dark-red" href="{% url 'records:index' %}">Go Back</a>
+    <input class="b ph3 pv2 input-reset ba b--green bg-transparent grow pointer f6 dib" type="submit" value="Submit"/>
 </form>
+</body>
+<footer class="pv4 ph3 ph5-m ph6-l mid-gray">
+    <small class="f6 db tc"><b class="ttu">Lucas Melin</b> 040 823 087</small>
+</footer>
+</html>

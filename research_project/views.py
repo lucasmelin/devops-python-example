@@ -7,11 +7,13 @@ def index(request):
     if request.method == 'POST':
         form = GreetingForm(request.POST)
         if form.is_valid():
+            # Write the new greeting to file
             greeting = form.cleaned_data['new_greeting']
             with open("greeting.txt", "w") as greet:
                 greet.write(greeting)
     else:
         form = GreetingForm()
+        # Read the greeting from file
         with open("greeting.txt") as greet:
             greeting = greet.read()
     context = {'greeting': greeting, 'form': form}

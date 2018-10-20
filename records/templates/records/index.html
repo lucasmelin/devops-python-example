@@ -1,18 +1,26 @@
-{% if greeting %}
-   <h1>{{ greeting }}</h1>
-{% else %}
-    <p>Welcome!</p>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+<body>
 {% if latest_commodity_list %}
-<ul>
-{%  for commodity in latest_commodity_list %}
-    <li>
-    <a href="{%  url 'records:commodity-detail' commodity.id %}">{{ commodity.name }}</a>
-</li>
-{% endfor %}
-</ul>
+    <div class="pa3 pa5-ns">
+    <ul class="list p10 measure center">
+        {% for commodity in latest_commodity_list %}
+            <li class="lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30">
+                <a class="f5 link blue hover-dark-gray" href="{% url 'records:commodity-detail' commodity.id %}">{{ commodity.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    </div>
 {% endif %}
-<p>
-    <a href="{%  url 'records:commodity-add' %}">Add Commodity</a>
-    <a href="{%  url 'research_project:index' %}">Back to Home</a>
-</p>
+<div class="ph3 tc">
+    <a class="f6 link dim ba ph3 pv2 mb2 dib dark-green" href="{% url 'records:commodity-add' %}">Add Commodity</a>
+    <a class="f6 link dim ba ph3 pv2 mb2 dib orange" href="{% url 'research_project:index' %}">Back to Home</a>
+</div>
+</body>
+<footer class="pv4 ph3 ph5-m ph6-l mid-gray">
+  <small class="f6 db tc"><b class="ttu">Lucas Melin</b> 040 823 087</small>
+</footer>
+</html>
