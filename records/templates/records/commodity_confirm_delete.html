@@ -1,8 +1,56 @@
-<h1>Commodity Delete</h1>
-<form method="post">{% csrf_token %}
-    Are you sure you want to delete "{{ object.name }}" ?
-    <input type="submit" value="Submit" />
-</form>
+{# Author: Lucas Melin #}
+{# Created: Oct 13, 2018 #}
+{# Last modified: Oct 20, 2018 #}
+{% load recordfilters %}
+<!DOCTYPE html>
+<html lang="en">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+<body>
+<article class="center mw5 mw6-ns hidden ba mv4 dark-red bg-washed-yellow">
+    <h1 class="f4 bg-dark-red washed-yellow mv0 pv2 ph3">{{ commodity.name }}</h1>
+    <div class="pa3 bt">
+        <dl class="lh-title pa4 mt0">
+            <dt class="f6 b">Value</dt>
+            <dd class="ml0">{{ commodity.value }}
+                <!-- Display correct scaling factor -->
+                {% if commodity.scalar_factor == "K" %}
+                    thousands of
+                {% elif commodity.scalar_factor == "U" %}
+                {% else %}
+                    {{ commodity.scalar_factor }}
+                {% endif %}
+                <!-- Display correct unit of measurement -->
+                {% if commodity.unit_of_measurement == "KGPY" %}
+                    kilograms per person per year
+                {% elif commodity.unit_of_measurement == "LPY" %}
+                    litres per person per year
+                {% else %}
+                    {{ commodity.unit_of_measurement }}
+                {% endif %}</dd>
+            <dt class="f6 b mt2">Food Category</dt>
+            <dd class="ml0">{% if commodity.food_category == "FA" %}
+                Food available
+            {% elif commodity.food_category == "FAFL" %}
+                Food available, adjusted for loss
+            {% else %}
+                {{ commodity.food_category }}
+            {% endif %}
+            </dd>
+        </dl>
+        <div class="ph3 tc">
+            <form class="measure center" method="post">{% csrf_token %}
+                <input class="b ph3 pv2 input-reset ba b--red red bg-white-70 grow pointer f6 dib" type="submit"
+                       value="Delete"/>
+                <a class="f6 link grow pointer ba ph3 pv2 mb2 dib dark-green bg-white-70" href="{% url 'records:index' %}">Go Back</a>
+            </form>
+        </div>
+    </div>
+</article>
+
+</body>
 <footer class="pv4 ph3 ph5-m ph6-l mid-gray">
-  <small class="f6 db tc"><b class="ttu">Lucas Melin</b> 040 823 087</small>
+    <small class="f6 db tc"><b class="ttu">Lucas Melin</b> 040 823 087</small>
 </footer>
+</html>

@@ -1,3 +1,18 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+File name: models.py
+Author: Lucas Melin
+Date created: Oct 15, 2018
+Date last modified: Oct 21, 2018
+Python version: 3.7
+
+This models a Commodity as defined in the original dataset found here:
+Statistics Canada. (May 30, 2018). Food available in Canada [web[age] Retrieved on October 13, 2018
+from  https://open.canada.ca/data/en/dataset/a683c640-b5fd-48f8-a0f1-d619b8f7e04c
+Used under the Open Government Licence found at
+https://open.canada.ca/en/open-government-licence-canada
+"""
 from django.db import models
 from django.urls import reverse
 import csv
@@ -5,6 +20,10 @@ from io import StringIO
 
 
 class Commodity(models.Model):
+    """
+    Models all the fields for a Commodity, and defines the preset
+    choices, default choice, and max length where applicable.
+    """
     KILOGRAMS = "KGPY"
     LITRES = "LPY"
     UNIT_OF_MEASUREMENT_CHOICES = (
@@ -42,11 +61,17 @@ class Commodity(models.Model):
     value = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
-        # String representation of a Commodity object
+        """
+        String representation of a Commodity object.
+        Prints the name, value and unit of measurement
+        """
         return '{} {} {}'.format(self.name, self.value, self.unit_of_measurement)
 
     def get_absolute_url(self):
-        # Gets called after the edit occurs
+        """
+        Gets called after the edit occurs in order to redirect to
+        the proper details page.
+        """
         return reverse('records:commodity-detail', kwargs={'commodity_id': self.pk})
 
 
@@ -72,4 +97,5 @@ def save_csv(csv_file):
             scalar_factor=row['SCALAR_FACTOR'],
             value=row_value,
         )
+        # Save each row
         c.save()

@@ -1,3 +1,6 @@
+{# Author: Lucas Melin #}
+{# Created: Oct 13, 2018 #}
+{# Last modified: Oct 20, 2018 #}
 {% load recordfilters %}
 <!DOCTYPE html>
 <html lang="en">
@@ -37,9 +40,9 @@
             </dd>
         </dl>
         <div class="ph3 tc">
-            <a class="f6 link dim ba ph3 pv2 mb2 dib dark-green" href="{% url 'records:index' %}">Go Back</a>
-            <a class="f6 link dim ba ph3 pv2 mb2 dib dark-blue" href="{% url 'records:commodity-update' commodity.id %}">Update</a>
-            <a class="f6 link dim ba ph3 pv2 mb2 dib dark-red" href="{% url 'records:commodity-delete' commodity.id %}">Delete</a>
+            <a class="b f6 link dim ba ph3 pv2 mb2 dib dark-green" href="{% url 'records:index' %}">Go Back</a>
+            <a class="b f6 link dim ba ph3 pv2 mb2 dib dark-blue" href="{% url 'records:commodity-update' commodity.id %}">Update</a>
+            <a class="b f6 link dim ba ph3 pv2 mb2 dib dark-red" href="{% url 'records:commodity-delete' commodity.id %}">Delete</a>
         </div>
     </div>
 </article>
