@@ -16,5 +16,7 @@ from . import views
 app_name = 'research_project'
 # Patterns to match when determining which view to redirect to
 urlpatterns = [
-    path('', views.index, name='index')
+    path('', views.index, name='index'),
+    path('journal', views.journal, name='journal'),
+    path('addentry', views.add_journal_entry, name='add_journal_entry')
 ]

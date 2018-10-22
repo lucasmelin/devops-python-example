@@ -13,6 +13,10 @@
 <body>
 <article>
     <header class="bg-green sans-serif">
+        <nav class="f6 fw6 ttu tracked">
+            <a class="link dim white dib mr3" href="{% url 'research_project:journal' %}" title="Journal">Journal</a>
+            <a class="link dim white dib mr3" href="{% url 'records:index' %}" title="Commodities">Commodities</a>
+        </nav>
         <div class="mw9 center pa4 pt5-ns ph7-l">
             <h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
                 <span class="bg-black-90 lh-copy white pa1 tracked-tight">
@@ -23,9 +27,9 @@
                    {% endif %}
                 </span>
             </h3>
-            <form class="form" action="/" method="post">
+            <form class="greeting_form" action="/" method="post">
                 {% csrf_token %}
-                {% for field in form %}
+                {% for field in greet_form %}
                     <label class="db fw6 lh-copy f6" for="{{ field.name }}">{{ field.label }}</label>
                     {{ field | addCssClass:"pa1 input-reset ba bg-transparent hover-bg-light-green w-70" }}
                 {% endfor %}
@@ -34,9 +38,7 @@
             </form>
         </div>
     </header>
-    <div class="ph3 tc">
-        <a class="b f6 ma3 link dim ba ph3 pv2 mb2 dib dark-green" href="{% url 'records:index' %}">Commodities</a>
-    </div>
+
 </article>
 </body>
 <footer class="pv4 ph3 ph5-m ph6-l mid-gray">

@@ -1,0 +1,58 @@
+{# Author: Lucas Melin #}
+{# Created: Oct 13, 2018 #}
+{# Last modified: Oct 20, 2018 #}
+{% load research_projectfilters %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lucas Melin | Home</title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+</head>
+<body>
+<article>
+    <header class="bg-blue sans-serif">
+        <nav class="f6 fw6 ttu tracked">
+            <a class="link dim white dib mr3" href="{% url 'research_project:index' %}" title="Home">Home</a>
+            <a class="link dim white dib mr3" href="{% url 'records:index' %}" title="Commodities">Commodities</a>
+        </nav>
+        <div class="mw9 center pa4 pt5-ns ph7-l">
+            <h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
+                <span class="bg-black-90 lh-copy white pa1 tracked-tight">
+                   Journal
+                </span>
+            </h3>
+            <form class="journal_form" action="/addentry" method="post">
+                {% csrf_token %}
+                {% for field in journal_form %}
+                    <label class="pa2 db fw6 lh-copy f6" for="{{ field.name }}">{{ field.label }}</label>
+                    {{ field | addCssClass:"pa1 input-reset ba bg-transparent hover-bg-light-blue w-70" }}
+                {% endfor %}
+                <p>
+                    <input class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit"
+                           value="Submit">
+                </p>
+            </form>
+        </div>
+    </header>
+
+    <div>
+        <ul class="list pl0">
+            {% for entry in journal_data %}
+                <li class="pa3 pa4-ns bb b--black-10">
+                    <b class="dv f3 mb1">{{ entry.count }}</b>
+                    <span class="f5 db lh-copy measure">
+                        {{ entry }}
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</article>
+</body>
+<footer class="pv4 ph3 ph5-m ph6-l mid-gray">
+    <small class="f6 db tc"><b class="ttu">Lucas Melin</b> 040 823 087</small>
+</footer>
+</html>
+
