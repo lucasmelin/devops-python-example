@@ -1,29 +1,48 @@
 {# Author: Lucas Melin #}
 {# Created: Oct 13, 2018 #}
-{# Last modified: Oct 20, 2018 #}
+{# Last modified: Oct 22, 2018 #}
 <!DOCTYPE html>
-<html lang="en">
-<title></title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lucas Melin | Records</title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+</head>
 <body>
+<article>
+    <header class="bg-red sans-serif">
+        <nav class="f6 fw6 ttu tracked">
+            <a class="link dim white dib mr3" href="{% url 'research_project:index' %}" title="Home">Home</a>
+            <a class="link dim white dib mr3" href="{% url 'research_project:journal' %}" title="Journal">Journal</a>
+        </nav>
+        <div class="mw9 center pa4 pt5-ns ph7-l">
+            <h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
+                <span class="bg-black-90 lh-copy white pa1 tracked-tight">
+                   Commodities
+                </span>
+            </h3>
+        </div>
+    </header>
+</article>
 {% if latest_commodity_list %}
     <div class="pa3 pa5-ns">
-    <ul class="list p10 measure center">
-        {% for commodity in latest_commodity_list %}
-            <li class="lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30">
-                <a class="f5 link blue hover-dark-gray" href="{% url 'records:commodity-detail' commodity.id %}">{{ commodity.name }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+        <ul class="list p10 measure center">
+            {% for commodity in latest_commodity_list %}
+                <li class="lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30">
+                    <a class="f5 link blue hover-dark-gray"
+                       href="{% url 'records:commodity-detail' commodity.id %}">{{ commodity.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 {% endif %}
 <div class="ph3 tc">
-    <a class="b f6 link dim ba ph3 pv2 mb2 dib dark-green" href="{% url 'records:commodity-add' %}">Add Commodity</a>
-    <a class="b f6 link dim ba ph3 pv2 mb2 dib orange" href="{% url 'research_project:index' %}">Back to Home</a>
+    <a class="b f6 link dim ba ph3 pv2 mb2 dib dark-green" href="{% url 'records:commodity-add' %}">Add
+        Commodity</a>
 </div>
 </body>
 <footer class="pv4 ph3 ph5-m ph6-l mid-gray">
-  <small class="f6 db tc"><b class="ttu">Lucas Melin</b> 040 823 087</small>
+    <small class="f6 db tc"><b class="ttu">Lucas Melin</b> 040 823 087</small>
 </footer>
 </html>

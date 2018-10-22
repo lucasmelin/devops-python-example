@@ -4,7 +4,7 @@
 File name: urls.py
 Author: Lucas Melin
 Date created: Oct 15, 2018
-Date last modified: Oct 20, 2018
+Date last modified: Oct 22, 2018
 Python version: 3.7
 
 """
