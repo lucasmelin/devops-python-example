@@ -7,6 +7,7 @@ Date created: Oct 19, 2018
 Date last modified: Oct 20, 2018
 Python version: 3.7
 """
+import datetime
 import os
 
 from django.shortcuts import render, redirect
@@ -82,8 +83,9 @@ def add_journal_entry(request):
             entry = form.cleaned_data['new_journal_entry']
             # Open file for appending
             try:
-                with open("journal.txt", "a") as journal:
-                    journal.write(entry + '\n')
+                with open("journal.txt", "a") as j:
+                    j.write(datetime.datetime.now().strftime("%A, %B %d, %Y") + '\t')
+                    j.write(entry + '\n')
             except IOError:
                 # Could not access file. Ignore the exception,
                 # since the greeting already has a default value
@@ -92,10 +94,14 @@ def add_journal_entry(request):
 
 
 def get_journal_entries(filename):
+    """
+    Retrieve all the journal entries from the file and return them as a list.
+    """
     entries = []
 
     if os.path.exists(filename):
-        with open(filename) as journal:
-            for entry in journal.readlines():
-                entries.append(entry.rstrip())
+        with open(filename) as j:
+            for entry in j.readlines():
+                entry_list = [piece.strip() for piece in entry.split('\t')]
+                entries.append(entry_list)
     return entries

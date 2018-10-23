@@ -2,19 +2,40 @@
 {# Created: Oct 13, 2018 #}
 {# Last modified: Oct 20, 2018 #}
 {% load recordfilters %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+<link rel="stylesheet" href="{%  static "css/tachyons.css" %}">
 <body>
+<article>
+    <header class="bg-gold sans-serif">
+        <nav class="f6 fw6 ttu tracked">
+            <a class="link dim white dib mr3" href="{% url 'research_project:index' %}" title="Home">Home</a>
+            <a class="link dim white dib mr3" href="{% url 'records:index' %}" title="Commodities">Commodities</a>
+            <a class="link dim white dib mr3" href="{% url 'research_project:journal' %}" title="Journal">Journal</a>
+        </nav>
+        <div class="mw9 center pa4 pt5-ns ph7-l">
+            <h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
+                <span class="bg-black-90 lh-copy white pa1 tracked-tight">
+                   Commodity
+                </span>
+            </h3>
+        </div>
+    </header>
+</article>
 <form class="measure center" method="post">{% csrf_token %}
-    <h3 class="f5 f4-ns fw6 mid-gray">Add Commodity</h3>
     {% for field in form %}
-        <label class="db fw6 lh-copy f6" for="{{ field.name }}">{{ field.label }}</label>
-        {{ field | addCssClass:"pa2 input-reset ba bg-transparent hover-bg-green hover-white w-100" }}
+        {%  if field.field.widget.input_type == 'checkbox' %}
+            <label class="pa2 db fw6 lh-copy f6 ttu" for="{{ field.name }}">{{ field.label }}</label>
+            {{ field }}
+        {%  else %}
+        <label class="pa2 db fw6 lh-copy f6 ttu" for="{{ field.name }}">{{ field.label }}</label>
+        {{ field | addCssClass:"pa2 input-reset ba bg-transparent w-100" }}
+        {% endif %}
     {% endfor %}
-    <div class="mv3">
+    <div class="tc mv3">
         <a class="b f6 link grow pointer ba ph3 pv2 mb2 dib dark-red" href="{% url 'records:index' %}">Go Back</a>
         <input class="b ph3 pv2 input-reset ba b--green dark-green bg-transparent grow pointer f6 dib" type="submit"
                value="Submit"/>

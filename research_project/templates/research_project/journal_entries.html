@@ -1,14 +1,15 @@
 {# Author: Lucas Melin #}
 {# Created: Oct 13, 2018 #}
-{# Last modified: Oct 22, 2018 #}
+{# Last modified: Oct 23, 2018 #}
 {% load research_projectfilters %}
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lucas Melin | Home</title>
-    <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+    <title>Lucas Melin | Journal</title>
+    <link rel="stylesheet" href="{% static "css/tachyons.css" %}">
 </head>
 <body>
 <article>
@@ -37,13 +38,15 @@
         </div>
     </header>
 
-    <div>
+    <div class="measure center">
         <ul class="list pl0">
             {% for entry in journal_data %}
                 <li class="pa3 pa4-ns bb b--black-10">
-                    <b class="dv f3 mb1">{{ entry.count }}</b>
+                    {# entry.0 is the date stamp #}
+                    <b class="dv f5 mb1">{{ entry.0 }}</b>
+                    {# entry.1 is the journal text #}
                     <span class="f5 db lh-copy measure">
-                        {{ entry }}
+                        {{ entry.1 }}
                     </span>
                 </li>
             {% endfor %}

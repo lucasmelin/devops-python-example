@@ -1,13 +1,14 @@
 {# Author: Lucas Melin #}
 {# Created: Oct 13, 2018 #}
-{# Last modified: Oct 22, 2018 #}
+{# Last modified: Oct 23, 2018 #}
+{%  load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lucas Melin | Records</title>
-    <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+    <link rel="stylesheet" href="{%  static "css/tachyons.css" %}">
 </head>
 <body>
 <article>
@@ -22,25 +23,79 @@
                    Commodities
                 </span>
             </h3>
+            <a class="b f6 link dim ba pa1 mb2 dib bg-black-90 white" href="{% url 'records:commodity-add' %}">Add
+                Commodity</a>
+            <a class="b f6 link dim ba pa1 mb2 dib bg-black-90 white" href="{% url 'records:commodity-upload' %}">Bulk Add
+                Commodities</a>
         </div>
     </header>
 </article>
+
 {% if latest_commodity_list %}
-    <div class="pa3 pa5-ns">
-        <ul class="list p10 measure center">
-            {% for commodity in latest_commodity_list %}
-                <li class="lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30">
-                    <a class="f5 link blue hover-dark-gray"
-                       href="{% url 'records:commodity-detail' commodity.id %}">{{ commodity.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+    <div class="pa4">
+        <div class="overflow-auto">
+            <table class="f6 w-100 mw8 center" cellspacing="0">
+                <thead>
+                <tr class="stripe-dark">
+                    <th class="fw6 tl pa3 bg-white">Ref Date</th>
+                    <th class="fw6 tl pa3 bg-white">Geo</th>
+                    <th class="fw6 tl pa3 bg-white">DGUID</th>
+                    <th class="fw6 tl pa3 bg-white">Food Category</th>
+                    <th class="fw6 tl pa3 bg-white">Commodity</th>
+                    <th class="fw6 tl pa3 bg-white">UOM</th>
+                    <th class="fw6 tl pa3 bg-white">Scalar Factor</th>
+                    <th class="fw6 tl pa3 bg-white">Vector</th>
+                    <th class="fw6 tl pa3 bg-white">Coordinate</th>
+                    <th class="fw6 tl pa3 bg-white">Value</th>
+                    <th class="fw6 tl pa3 bg-white">Terminated</th>
+                </tr>
+                </thead>
+                <tbody class="lh-copy">
+                {% for commodity in latest_commodity_list %}
+                    <tr class="stripe-dark">
+                        <td class="pa3">{{ commodity.ref_date }}</td>
+                        <td class="pa3">{{ commodity.geo }}</td>
+                        <td class="pa3">{{ commodity.dguid }}</td>
+                        <td class="pa3">{{ commodity.food_category }}</td>
+                        <td class="pa3">
+                            <a class="f5 link blue hover-dark-gray"
+                               href="{% url 'records:commodity-detail' commodity.id %}">{{ commodity.name }}</a>
+                        </td>
+                        <td class="pa3">{{ commodity.unit_of_measurement }}</td>
+                        <td class="pa3">{{ commodity.scalar_factor }}</td>
+                        <td class="pa3">{{ commodity.vector }}</td>
+                        <td class="pa3">{{ commodity.coordinate }}</td>
+                        <td class="pa3">{{ commodity.value }}</td>
+                        <td class="pa3">{{ commodity.terminated }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endif %}
-<div class="ph3 tc">
-    <a class="b f6 link dim ba ph3 pv2 mb2 dib dark-green" href="{% url 'records:commodity-add' %}">Add
-        Commodity</a>
+<div class="tc cf mv2">
+    <span class="step-links">
+        {% if latest_commodity_list.has_previous %}
+            <a class="dim link ba near-black b--near-black pa2 mr2" href="?page=1">&laquo; first</a>
+        {% endif %}
+
+        {% for page in latest_commodity_list.paginator.page_range %}
+            {% if latest_commodity_list.number == page %}
+                <span class="b bg-dark-red near-white ba b--near-black pa2 mr2">{{ page }}</span>
+            {% elif page > latest_commodity_list.number|add:'-5' and page < latest_commodity_list.number|add:'5' %}
+                <a class="dim link ba b--near-black near-black pa2 mr2" href="?page={{ page }}">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if latest_commodity_list.has_next %}
+            <a class="dim link ba near-black b--near-black pa2 mr2"
+               href="?page={{ latest_commodity_list.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
 </div>
+
+
 </body>
 <footer class="pv4 ph3 ph5-m ph6-l mid-gray">
     <small class="f6 db tc"><b class="ttu">Lucas Melin</b> 040 823 087</small>

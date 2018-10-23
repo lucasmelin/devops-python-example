@@ -4,9 +4,10 @@
 File name: views.py
 Author: Lucas Melin
 Date created: Oct 15, 2018
-Date last modified: Oct 20, 2018
+Date last modified: Oct 23, 2018
 Python version: 3.7
 """
+from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -19,13 +20,16 @@ from .models import save_csv, Commodity
 def index(request):
     """
     Function that gets called when the records index is visited. Returns the
-    10 most recently added Commodities.
-    :param request:
-    :return:
+    current page of Commodities.
     """
-    # Sort the commodities in descending id order, and return a
-    # slice of the last 10 items.
-    latest_commodity_list = Commodity.objects.order_by('-id')[:10]
+    # Sort the commodities in descending id order
+    commodity_list = Commodity.objects.all().order_by('-id')
+    # Show 5 commodities per page
+    paginator = Paginator(commodity_list, 5)
+    # Get the page number from the query param
+    page = request.GET.get('page')
+    # Create a list of commodities from the current page's results
+    latest_commodity_list = paginator.get_page(page)
     context = {'latest_commodity_list': latest_commodity_list}
     return render(request, 'records/index.html', context)
 
@@ -58,15 +62,26 @@ def detail(request, commodity_id):
 
 
 class CommodityCreate(CreateView):
+    """
+    Renders a view to create a new Commodity with the specified fields.
+    """
     model = Commodity
-    fields = ['name', 'food_category', 'value', 'unit_of_measurement', 'scalar_factor']
+    fields = ['ref_date', 'geo', 'dguid', 'food_category', 'name', 'value', 'unit_of_measurement', 'scalar_factor',
+              'vector', 'coordinate', 'status', 'terminated']
 
 
 class CommodityUpdate(UpdateView):
+    """
+    Renders a view to modify and existing Commodity with the specified fields.
+    """
     model = Commodity
-    fields = ['name', 'food_category', 'value', 'unit_of_measurement', 'scalar_factor']
+    fields = ['ref_date', 'geo', 'dguid', 'food_category', 'name', 'value', 'unit_of_measurement', 'scalar_factor',
+              'vector', 'coordinate', 'status', 'terminated']
 
 
 class CommodityDelete(DeleteView):
+    """
+     Renders a view to delete a Commodity. Redirects to 'records:index' when deletion is complete.
+    """
     model = Commodity
     success_url = reverse_lazy('records:index')
