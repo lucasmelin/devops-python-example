@@ -1,3 +1,15 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+File name: urls.py
+Author: Lucas Melin
+Date created: Oct 15, 2018
+Date last modified: Oct 23, 2018
+Python version: 3.7
+
+This file provides the url patterns to match inside the records app,
+and maps each pattern to a view.
+"""
 from django.urls import path
 
 from records.views import CommodityCreate, CommodityUpdate, CommodityDelete

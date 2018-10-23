@@ -7,12 +7,20 @@
 <html lang="en">
 <title></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="{%  static "css/tachyons.css" %}">
+<link rel="stylesheet" href="{% static "css/tachyons.css" %}">
 <body>
 <article class="center mw5 mw6-ns hidden ba mv4 dark-red bg-washed-yellow">
     <h1 class="f4 bg-dark-red washed-yellow mv0 pv2 ph3">{{ commodity.name }}</h1>
     <div class="pa3 bt">
         <dl class="lh-title pa4 mt0">
+            <dt class="f6 b mt2">Ref Date</dt>
+            <dd class="ml0">{{ commodity.ref_date }}</dd>
+            <dt class="f6 b mt2">Geo</dt>
+            <dd class="ml0">{{ commodity.geo }}</dd>
+            <dt class="f6 b mt2">DGUID</dt>
+            <dd class="ml0">{{ commodity.dguid }}</dd>
+            <dt class="f6 b mt2">Value</dt>
+            <dd class="ml0">{{ commodity.value }}
             <dt class="f6 b">Value</dt>
             <dd class="ml0">{{ commodity.value }}
                 <!-- Display correct scaling factor -->
@@ -39,12 +47,17 @@
                 {{ commodity.food_category }}
             {% endif %}
             </dd>
+            <dt class="f6 b mt2">Vector</dt>
+            <dd class="ml0">{{ commodity.vector }}</dd>
+            <dt class="f6 b mt2">Coordinate</dt>
+            <dd class="ml0">{{ commodity.coordinate }}</dd>
         </dl>
         <div class="ph3 tc">
             <form class="measure center" method="post">{% csrf_token %}
                 <input class="b ph3 pv2 input-reset ba b--red red bg-white-70 grow pointer f6 dib" type="submit"
                        value="Delete"/>
-                <a class="f6 link grow pointer ba ph3 pv2 mb2 dib dark-green bg-white-70" href="{% url 'records:index' %}">Go Back</a>
+                <a class="f6 link grow pointer ba ph3 pv2 mb2 dib dark-green bg-white-70"
+                   href="{% url 'records:index' %}">Go Back</a>
             </form>
         </div>
     </div>
