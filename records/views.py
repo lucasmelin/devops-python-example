@@ -67,10 +67,10 @@ def commoditychart(request):
         height=600,
         width=800
     )
-
+    chart_commodity.generate()
     # Call the .generate() method on our chart
-    context = {'chart_commodity': chart_commodity.generate()}
-    return render(request, 'records/chart.html', context)
+    # context = {'chart_commodity': chart_commodity.generate()}
+    return render(request, 'records/chart.html')
 
 
 class CommodityCreate(CreateView):

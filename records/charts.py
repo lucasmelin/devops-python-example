@@ -33,5 +33,5 @@ class CommodityLineGraph():
         for key, value in chart_data.items():
             self.chart.add(key, value)
 
-        # Return the rendered chart
-        return self.chart.render(is_unicode=True)
+        # Save the generated chart to the static directory
+        return self.chart.render_to_file('records/static/charts/commodity_chart.svg')
