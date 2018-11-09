@@ -25,7 +25,7 @@ class CommodityLineGraph():
             data[commodity.name] = commodity.value
         return data
 
-    def generate(self):
+    def generate(self, filename):
         # Get the chart data
         chart_data = self.get_data()
 
@@ -34,4 +34,4 @@ class CommodityLineGraph():
             self.chart.add(key, value)
 
         # Save the generated chart to the static directory
-        return self.chart.render_to_file('records/static/charts/commodity_chart.svg')
+        return self.chart.render_to_file('records/static/charts/' + filename)

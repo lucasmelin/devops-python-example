@@ -16,6 +16,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 from .forms import UploadFileForm
 from .models import save_csv, Commodity
 from .charts import CommodityLineGraph
+from .tasks import create_chart
 
 
 def index(request):
@@ -63,12 +64,7 @@ def detail(request, commodity_id):
 
 
 def commoditychart(request):
-    chart_commodity = CommodityLineGraph(
-        height=600,
-        width=800
-    )
-    #chart_commodity.generate()
-    # Call the .generate() method on our chart
+    create_chart()
     context = {'chart_svg': 'charts/commodity_chart.svg'}
     return render(request, 'records/chart.html', context)
 
