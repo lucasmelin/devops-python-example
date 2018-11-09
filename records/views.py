@@ -4,7 +4,7 @@
 File name: views.py
 Author: Lucas Melin
 Date created: Oct 15, 2018
-Date last modified: Oct 23, 2018
+Date last modified: Nov 9, 2018
 Python version: 3.7
 """
 from django.core.paginator import Paginator
@@ -15,6 +15,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 
 from .forms import UploadFileForm
 from .models import save_csv, Commodity
+from .charts import CommodityLineGraph
 
 
 def index(request):
@@ -59,6 +60,17 @@ def detail(request, commodity_id):
     except Commodity.DoesNotExist:
         raise Http404("Commodity does not exist")
     return render(request, 'records/commodity_detail.html', {'commodity': commodity})
+
+
+def commoditychart(request):
+    chart_commodity = CommodityLineGraph(
+        height=600,
+        width=800
+    )
+
+    # Call the .generate() method on our chart
+    context = {'chart_commodity': chart_commodity.generate()}
+    return render(request, 'records/chart.html', context)
 
 
 class CommodityCreate(CreateView):

@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lucas Melin | Commodities Chart</title>
+    <link rel="stylesheet" href="{% static "css/tachyons.css" %}">
+</head>
+<body>
+<article>
+    <header class="bg-light-purple sans-serif">
+        <nav class="f6 fw6 ttu tracked">
+            <a class="link dim white dib mr3" href="{% url 'research_project:index' %}" title="Home">Home</a>
+            <a class="link dim white dib mr3" href="{% url 'research_project:journal' %}" title="Journal">Journal</a>
+        </nav>
+        <div class="mw9 center pa4 pt5-ns ph7-l">
+            <h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
+                <span class="bg-black-90 lh-copy white pa1 tracked-tight">
+                   Commodities Chart
+                </span>
+            </h3>
+        </div>
+    </header>
+</article>
+<div class="tc">
+    {{ chart_commodity|safe }}
+</div>
+<script type="text/javascript" src="http://kozea.github.com/pygal.js/latest/pygal-tooltips.min.js"></script>
+</body>
+</html>
