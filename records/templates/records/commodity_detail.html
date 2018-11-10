@@ -57,6 +57,8 @@
                href="{% url 'records:commodity-update' commodity.id %}">Update</a>
             <a class="b f6 link dim ba ph3 pv2 mb2 dib dark-red"
                href="{% url 'records:commodity-delete' commodity.id %}">Delete</a>
+            <a class="b f6 link dim ba ph3 pv2 mb2 dib dark-blue"
+               href="{% url 'records:commodity-hist-chart' commodity.id %}">Historical Amount</a>
         </div>
     </div>
 </article>
