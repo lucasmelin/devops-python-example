@@ -10,7 +10,7 @@ Python version: 3.7
 This file is read when run_huey executes in order to parse which functions
 are multi-threaded.
 """
-from huey.contrib.djhuey import task
+from huey.contrib.djhuey import task, lock_task
 from .charts import CommodityBarChart, CommodityLineGraph, get_data_food_available_2017
 
 

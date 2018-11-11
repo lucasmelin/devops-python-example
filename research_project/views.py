@@ -49,11 +49,9 @@ def index(request):
             # Could not access file. Ignore the exception,
             # since the greeting already has a default value
             pass
-    # Save the greeting and forms as a dictionary to return
+    # Save the greeting and form as a dictionary to return
     # with the request
-    journal_form = JournalEntryForm()
-    journal_data = get_journal_entries("journal.txt")
-    context = {'greeting': greeting, 'greet_form': form, 'journal_form': journal_form, 'journal_data': journal_data}
+    context = {'greeting': greeting, 'greet_form': form}
     return render(request, 'research_project/index.html', context)
 
 
@@ -66,6 +64,10 @@ def journal(request):
 
     journal_form = JournalEntryForm()
     journal_data = get_journal_entries("journal.txt")
+
+    # Sort the entries by date
+    journal_data.sort(key=sort_by_date, reverse=False)
+
     context = {'journal_form': journal_form, 'journal_data': journal_data}
     return render(request, 'research_project/journal_entries.html', context)
 
@@ -105,3 +107,7 @@ def get_journal_entries(filename):
                 entry_list = [piece.strip() for piece in entry.split('\t')]
                 entries.append(entry_list)
     return entries
+
+
+def sort_by_date(to_sort):
+    return datetime.datetime.now().strptime(to_sort[0], "%A, %B %d, %Y")

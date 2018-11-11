@@ -7,6 +7,7 @@ Date created: Oct 15, 2018
 Date last modified: Nov 9, 2018
 Python version: 3.7
 """
+from django.contrib.staticfiles import finders
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
@@ -15,8 +16,8 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 
 from .forms import UploadFileForm
 from .models import save_csv, Commodity
-from .charts import CommodityBarChart
 from .tasks import create_chart, create_historical_chart
+
 
 
 def index(request):
@@ -70,10 +71,12 @@ def commodity_chart(request):
 
 
 def historical_data(request, commodity_id):
-    create_historical_chart(commodity_id)
     chart_to_render = 'charts/' + str(commodity_id) + '.svg'
-    context = {'chart_svg': chart_to_render}
-    return render(request, 'records/chart.html', context)
+    if finders.find(chart_to_render):
+        context = {'chart_svg': chart_to_render}
+        return render(request, 'records/chart.html', context)
+    create_historical_chart(commodity_id)
+    return render(request, 'records/chart-loading.html')
 
 
 class CommodityCreate(CreateView):
