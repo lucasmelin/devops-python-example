@@ -1,3 +1,6 @@
+{# Author: Lucas Melin #}
+{# Created: Nov 9, 2018 #}
+{# Last modified: Nov 11, 2018 #}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +15,7 @@
     <header class="bg-light-purple sans-serif">
         <nav class="f6 fw6 ttu tracked">
             <a class="link dim white dib mr3" href="{% url 'research_project:index' %}" title="Home">Home</a>
+            <a class="link dim white dib mr3" href="{% url 'records:index' %}" title="Commodities">Commodities</a>
             <a class="link dim white dib mr3" href="{% url 'research_project:journal' %}" title="Journal">Journal</a>
         </nav>
         <div class="mw9 center pa4 pt5-ns ph7-l">
@@ -29,6 +33,6 @@
 <script type="text/javascript" src="http://kozea.github.com/pygal.js/latest/pygal-tooltips.min.js"></script>
 </body>
 <footer class="pv4 ph3 ph5-m ph6-l mid-gray">
-    <small class="f6 db tc"><b class="ttu">Lucas Melin</b> 040 823 087</small>
+    <small class="f6 db tc"><b class="ttu">Lucas Melin</b></small>
 </footer>
 </html>

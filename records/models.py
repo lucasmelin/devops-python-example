@@ -4,7 +4,7 @@
 File name: models.py
 Author: Lucas Melin
 Date created: Oct 15, 2018
-Date last modified: Oct 23, 2018
+Date last modified: Nov 11, 2018
 Python version: 3.7
 
 This models a Commodity as defined in the original dataset found here:
@@ -23,6 +23,7 @@ class Commodity(models.Model):
     """
     Models all the fields for a Commodity, and defines the preset
     choices, default choice, and max length where applicable.
+    Lucas Melin
     """
     KILOGRAMS = "KGPY"
     LITRES = "LPY"

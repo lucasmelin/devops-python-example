@@ -4,7 +4,7 @@
 File name: views.py
 Author: Lucas Melin
 Date created: Oct 19, 2018
-Date last modified: Oct 20, 2018
+Date last modified: Nov 11, 2018
 Python version: 3.7
 """
 import datetime
@@ -61,15 +61,27 @@ def journal(request):
     """
     # Save the greeting and forms as a dictionary to return
     # with the request
-
     journal_form = JournalEntryForm()
     journal_data = get_journal_entries("journal.txt")
 
-    # Sort the entries by date
-    journal_data.sort(key=sort_by_date, reverse=False)
-
-    context = {'journal_form': journal_form, 'journal_data': journal_data}
+    sort_order = request.GET.get('sort', 'asc')
+    if sort_order == 'desc':
+        # Sort the entries by date descending
+        journal_data.sort(key=entry_to_date, reverse=False)
+        sort_order = 'asc'
+    elif sort_order == 'asc':
+        # Sort the entries by date ascending
+        journal_data.sort(key=entry_to_date, reverse=True)
+        sort_order = 'desc'
+    context = {'journal_form': journal_form, 'journal_data': journal_data, 'sort_order': sort_order}
     return render(request, 'research_project/journal_entries.html', context)
+
+
+def entry_to_date(to_sort):
+    """
+    Returns the first item of the list parsed as a date.
+    """
+    return datetime.datetime.now().strptime(to_sort[0], "%A, %B %d, %Y")
 
 
 def add_journal_entry(request):
@@ -107,7 +119,3 @@ def get_journal_entries(filename):
                 entry_list = [piece.strip() for piece in entry.split('\t')]
                 entries.append(entry_list)
     return entries
-
-
-def sort_by_date(to_sort):
-    return datetime.datetime.now().strptime(to_sort[0], "%A, %B %d, %Y")
