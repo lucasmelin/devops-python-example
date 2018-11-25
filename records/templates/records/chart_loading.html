@@ -1,0 +1,35 @@
+{# Author: Lucas Melin #}
+{# Created: Nov 9, 2018 #}
+{# Last modified: Nov 11, 2018 #}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="refresh" content="2">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lucas Melin | Commodities Chart</title>
+    <link rel="stylesheet" href="{% static "css/tachyons.css" %}">
+</head>
+<body>
+<article>
+    <header class="bg-light-purple sans-serif">
+        <nav class="f6 fw6 ttu tracked">
+            <a class="link dim white dib mr3" href="{% url 'research_project:index' %}" title="Home">Home</a>
+            <a class="link dim white dib mr3" href="{% url 'records:index' %}" title="Commodities">Commodities</a>
+            <a class="link dim white dib mr3" href="{% url 'research_project:journal' %}" title="Journal">Journal</a>
+        </nav>
+        <div class="mw9 center pa4 pt5-ns ph7-l">
+            <h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
+                <span class="bg-black-90 lh-copy white pa1 tracked-tight">
+                   Waiting for chart to generate...
+                </span>
+            </h3>
+        </div>
+    </header>
+</article>
+</body>
+<footer class="pv4 ph3 ph5-m ph6-l mid-gray">
+    <small class="f6 db tc"><b class="ttu">Lucas Melin</b></small>
+</footer>
+</html>

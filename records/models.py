@@ -4,7 +4,7 @@
 File name: models.py
 Author: Lucas Melin
 Date created: Oct 15, 2018
-Date last modified: Nov 11, 2018
+Date last modified: Nov 24, 2018
 Python version: 3.7
 
 This models a Commodity as defined in the original dataset found here:
@@ -78,7 +78,9 @@ class Commodity(models.Model):
     vector = models.CharField(max_length=10, default="")
     coordinate = models.CharField(max_length=10, default="")
     status = models.CharField(max_length=10, default="")
+    symbol = models.CharField(max_length=2, default="")
     terminated = models.BooleanField(default=False)
+    decimals = models.IntegerField()
 
     def __str__(self):
         """
@@ -125,8 +127,10 @@ def save_csv(csv_file):
             vector=row['VECTOR'],
             coordinate=row['COORDINATE'],
             status=row['STATUS'],
+            symbol=row['SYMBOL'],
             value=row_value,
-            terminated=(row['TERMINATED'] == 't')
+            terminated=(row['TERMINATED'] == 't'),
+            decimals=row['DECIMALS']
         )
         # Add to list of entries to insert
         rows_to_add.append(c)

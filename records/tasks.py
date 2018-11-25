@@ -16,6 +16,9 @@ from .charts import CommodityBarChart, CommodityLineGraph, get_data_food_availab
 
 @task()
 def create_chart():
+    """
+    Asynchronously generate a bar chart containing the food available in 2017.
+    """
     chart_commodity = CommodityBarChart(
         height=600,
         width=800,
@@ -26,6 +29,9 @@ def create_chart():
 
 @task()
 def create_historical_chart(commodity_id):
+    """
+    Asynchronously generate a line containing the historical value of a specific commodity.
+    """
     chart_commodity = CommodityLineGraph(
         height=600,
         explicit_size=True

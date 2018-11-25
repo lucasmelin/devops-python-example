@@ -14,6 +14,9 @@ from .models import Commodity
 
 
 def get_data_food_available_2017():
+    """
+    Returns all food available in 2017.
+    """
     data = {}
     for commodity in Commodity.objects.all().filter(ref_date='2017').filter(
             unit_of_measurement__exact="Kilograms per person, per year").filter(

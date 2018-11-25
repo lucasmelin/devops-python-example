@@ -4,7 +4,7 @@
 File name: views.py
 Author: Lucas Melin
 Date created: Oct 19, 2018
-Date last modified: Nov 11, 2018
+Date last modified: Nov 24, 2018
 Python version: 3.7
 """
 import datetime
@@ -12,6 +12,7 @@ import os
 
 from django.shortcuts import render, redirect
 
+from research_project.models import Weather
 from .forms import GreetingForm, JournalEntryForm
 
 
@@ -49,9 +50,15 @@ def index(request):
             # Could not access file. Ignore the exception,
             # since the greeting already has a default value
             pass
-    # Save the greeting and form as a dictionary to return
+    # Get the most recent weather data from the database
+    try:
+        latest_weather = Weather.objects.latest('timestamp')
+    except Weather.DoesNotExist:
+        # We have no weather data in the database yet
+        latest_weather = None
+    # Save the greeting, weather and form as a dictionary to return
     # with the request
-    context = {'greeting': greeting, 'greet_form': form}
+    context = {'greeting': greeting, 'greet_form': form, 'weather': latest_weather}
     return render(request, 'research_project/index.html', context)
 
 

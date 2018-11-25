@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lucas Melin | Home</title>
-    <link rel="stylesheet" href="{%  static "css/tachyons.css" %}">
+    <link rel="stylesheet" href="{% static "css/tachyons.css" %}">
 </head>
 <body>
 <article>
@@ -39,7 +39,14 @@
             </form>
         </div>
     </header>
-
+    <div class="pa4 ph7-l georgia mw9-l center">
+        <p class="f5 f3-ns lh-copy measure georgia center">
+            {% if weather %}
+                The weather in {{ weather.city }}, {{ weather.country }} is {{ weather.temperature }}°C and
+                {{ weather.description }}.
+            {% endif %}
+        </p>
+    </div>
 </article>
 </body>
 <footer class="pv4 ph3 ph5-m ph6-l mid-gray">
