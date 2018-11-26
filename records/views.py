@@ -90,7 +90,7 @@ class CommodityCreate(CreateView):
     """
     model = Commodity
     fields = ['ref_date', 'geo', 'dguid', 'food_category', 'name', 'value', 'unit_of_measurement', 'scalar_factor',
-              'vector', 'coordinate', 'status', 'terminated']
+              'vector', 'coordinate', 'status', 'symbol', 'decimals', 'terminated']
 
 
 class CommodityUpdate(UpdateView):
@@ -99,7 +99,7 @@ class CommodityUpdate(UpdateView):
     """
     model = Commodity
     fields = ['ref_date', 'geo', 'dguid', 'food_category', 'name', 'value', 'unit_of_measurement', 'scalar_factor',
-              'vector', 'coordinate', 'status', 'terminated']
+              'vector', 'coordinate', 'status', 'symbol', 'decimals', 'terminated']
 
 
 class CommodityDelete(DeleteView):

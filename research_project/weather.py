@@ -4,7 +4,7 @@
 File name: weather.py
 Author: Lucas Melin
 Date created: Nov 22, 2018
-Date last modified: Nov 22, 2018
+Date last modified: Nov 25, 2018
 Python version: 3.7
 
 """

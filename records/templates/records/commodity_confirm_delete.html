@@ -1,6 +1,6 @@
 {# Author: Lucas Melin #}
 {# Created: Oct 13, 2018 #}
-{# Last modified: Nov 11, 2018 #}
+{# Last modified: Nov 25, 2018 #}
 {% load recordfilters %}
 {% load static %}
 <!DOCTYPE html>
@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="{% static "css/tachyons.css" %}">
 <body>
 <article class="center mw5 mw6-ns hidden ba mv4 dark-red bg-washed-yellow">
-    <h1 class="f4 bg-dark-red washed-yellow mv0 pv2 ph3">{{ commodity.name }}</h1>
+    <h1 class="f4 bg-dark-red washed-yellow mv0 pv2 ph3">{{ commodity.name }} - {% if commodity.terminated %}
+        Terminated{% else %}Active{% endif %}</h1>
     <div class="pa3 bt">
         <dl class="lh-title pa4 mt0">
             <dt class="f6 b mt2">Ref Date</dt>
@@ -20,8 +21,6 @@
             <dt class="f6 b mt2">DGUID</dt>
             <dd class="ml0">{{ commodity.dguid }}</dd>
             <dt class="f6 b mt2">Value</dt>
-            <dd class="ml0">{{ commodity.value }}
-            <dt class="f6 b">Value</dt>
             <dd class="ml0">{{ commodity.value }}
                 <!-- Display correct scaling factor -->
                 {% if commodity.scalar_factor == "K" %}
@@ -51,6 +50,10 @@
             <dd class="ml0">{{ commodity.vector }}</dd>
             <dt class="f6 b mt2">Coordinate</dt>
             <dd class="ml0">{{ commodity.coordinate }}</dd>
+            <dt class="f6 b mt2">Symbol</dt>
+            <dd class="ml0">{{ commodity.symbol }}</dd>
+            <dt class="f6 b mt2">Decimals</dt>
+            <dd class="ml0">{{ commodity.decimals }}</dd>
         </dl>
         <div class="ph3 tc">
             <form class="measure center" method="post">{% csrf_token %}

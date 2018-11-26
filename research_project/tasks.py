@@ -3,8 +3,8 @@
 """
 File name: tasks.py
 Author: Lucas Melin
-Date created: Nov 5, 2018
-Date last modified: Nov 9, 2018
+Date created: Nov 24, 2018
+Date last modified: Nov 25, 2018
 Python version: 3.7
 
 This file is read when run_huey executes in order to parse which functions
