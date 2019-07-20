@@ -1,0 +1,22 @@
+apiVersion: apps/v1 # Describes the version of the Kubernetes API
+kind: Deployment
+metadata:
+  name: devops-python
+  labels:
+    app: devops-python
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devops-python
+  template:
+    metadata:
+      labels:
+        app: devops-python
+    spec:
+      containers:
+        - name: devops-python
+          image: "lucasmelin/devops-python-example:v0"
+          imagePullPolicy: Never
+          ports:
+          - containerPort: 8080
