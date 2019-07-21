@@ -18,5 +18,10 @@ spec:
         - name: devops-python
           image: "lucasmelin/devops-python-example:v0"
           imagePullPolicy: Never
+          env:
+          - name: REDIS_URL
+            value: redis.default.svc.cluster.local
+          - name: GET_HOSTS_FROM
+            value: dns
           ports:
           - containerPort: 8080
