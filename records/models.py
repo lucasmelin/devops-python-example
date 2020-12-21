@@ -80,7 +80,7 @@ class Commodity(models.Model):
     status = models.CharField(max_length=10, default="")
     symbol = models.CharField(max_length=2, default="")
     terminated = models.BooleanField(default=False)
-    decimals = models.IntegerField()
+    decimals = models.IntegerField(default=2)
 
     def __str__(self):
         """
