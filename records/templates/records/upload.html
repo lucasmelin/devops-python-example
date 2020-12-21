@@ -1,48 +1,81 @@
-{# Author: Lucas Melin #}
-{# Created: Oct 13, 2018 #}
-{# Last modified: Nov 11, 2018 #}
-{% load static %}
+{# Author: Lucas Melin #} {# Created: Oct 13, 2018 #} {# Last modified: Nov 11,
+2018 #} {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Lucas Melin | Upload Records</title>
-    <link rel="stylesheet" href="{% static "css/tachyons.css" %}">
-</head>
-<body>
-<article>
-    <header class="bg-orange sans-serif">
+    <link rel="stylesheet" href="{% static "css/external/tachyons.css" %}">
+  </head>
+  <body>
+    <article>
+      <header class="bg-orange sans-serif">
         <nav class="f6 fw6 ttu tracked">
-            <a class="link dim white dib mr3" href="{% url 'research_project:index' %}" title="Home">Home</a>
-            <a class="link dim white dib mr3" href="{% url 'records:index' %}" title="Commodities">Commodities</a>
-            <a class="link dim white dib mr3" href="{% url 'research_project:journal' %}" title="Journal">Journal</a>
+          <a
+            class="link dim white dib mr3"
+            href="{% url 'research_project:index' %}"
+            title="Home"
+            >Home</a
+          >
+          <a
+            class="link dim white dib mr3"
+            href="{% url 'records:index' %}"
+            title="Commodities"
+            >Commodities</a
+          >
+          <a
+            class="link dim white dib mr3"
+            href="{% url 'research_project:journal' %}"
+            title="Journal"
+            >Journal</a
+          >
         </nav>
         <div class="mw9 center pa4 pt5-ns ph7-l">
-            <h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
-                <span class="bg-black-90 lh-copy white pa1 tracked-tight">
-                   Bulk Add Commodities
-                </span>
-            </h3>
+          <h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
+            <span class="bg-black-90 lh-copy white pa1 tracked-tight">
+              Bulk Add Commodities
+            </span>
+          </h3>
         </div>
-    </header>
-</article>
+      </header>
+    </article>
 
-<form class="pa4 measure center" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input class="b ph3 pv2 input-reset ba b--black black bg-transparent pointer f6 dib" type="file" name="recordfile">
-    <button class="b ph3 pv2 input-reset ba b--dark-green dark-green bg-transparent pointer f6 dib" type="submit">Upload</button>
-</form>
+    <form
+      class="pa4 measure center"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <input
+        class="b ph3 pv2 input-reset ba b--black black bg-transparent pointer f6 dib"
+        type="file"
+        name="recordfile"
+      />
+      <button
+        class="b ph3 pv2 input-reset ba b--dark-green dark-green bg-transparent pointer f6 dib"
+        type="submit"
+      >
+        Upload
+      </button>
+    </form>
 
-{% if uploaded_file_url %}
-    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-{% endif %}
+    {% if uploaded_file_url %}
+    <p>
+      File uploaded at:
+      <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a>
+    </p>
+    {% endif %}
 
-<div class="tc">
-    <a class="b f6 link grow pointer ba ph3 pv2 mb2 dib dark-red" href="{% url 'records:index' %}">Go Back</a>
-</div>
-</body>
-<footer class="pv4 ph3 ph5-m ph6-l mid-gray">
+    <div class="tc">
+      <a
+        class="b f6 link grow pointer ba ph3 pv2 mb2 dib dark-red"
+        href="{% url 'records:index' %}"
+        >Go Back</a
+      >
+    </div>
+  </body>
+  <footer class="pv4 ph3 ph5-m ph6-l mid-gray">
     <small class="f6 db tc"><b class="ttu">Lucas Melin</b></small>
-</footer>
+  </footer>
 </html>
