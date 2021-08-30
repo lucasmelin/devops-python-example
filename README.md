@@ -7,7 +7,7 @@
 ### Without Docker
 
 Activate the python venv by running `venv\Scripts\activate.bat`. To install the required python packages using the 
-requirements.txt, run `pip isntall -r requirements.txt`
+requirements.txt, run `pip install -r requirements.txt`
 
 #### Django
 
