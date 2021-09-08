@@ -1,5 +1,9 @@
 # DevOps Python Example
 
+A demo project for showing off DevOps tools and processes like GitHub Actions and Dependabot alerts.
+
+Note that this repository has dependencies with known security vulnerabilities, which is purposeful to show off things like GitHub Security Advisories.
+
 ## Installation and setup
 
 ### With Docker
