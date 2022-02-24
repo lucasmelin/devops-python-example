@@ -1,6 +1,6 @@
 certifi==2018.10.15
 chardet==3.0.4
-Django==2.1.2
+Django==2.2.27
 huey==1.10.3
 idna==2.7
 pygal==2.4.0
